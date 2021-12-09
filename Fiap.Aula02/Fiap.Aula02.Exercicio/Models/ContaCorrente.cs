@@ -1,10 +1,11 @@
-﻿
+﻿using System;
+
 namespace Fiap.Aula02.Exercicio.Models
 {
     class ContaCorrente
     {
         //Propriedades
-        public decimal Saldo { get; set; }
+        public decimal Saldo { get; private set; }
         public double Numero { get; set; }
         public bool Especial { get; set; }
         public decimal Limite { get; set; }
@@ -72,6 +73,17 @@ namespace Fiap.Aula02.Exercicio.Models
                 return true;
             }
             return false;
+        }
+
+        public decimal CalcularValorTaxaJuros(int dias)
+        {
+            //Se estiver utilizando o limite, calcular o valor do juros de acordo com a propriedade e o nr de dias
+            if (Saldo < 0)
+            {
+                //Converter um double para decimal
+                return Convert.ToDecimal(Juros) * dias * Saldo;
+            }
+            return 0;
         }
 
     }//class
