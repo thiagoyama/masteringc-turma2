@@ -41,14 +41,16 @@ namespace Fiap.Aula02.Exercicio
             double numeroPoupanca = double.Parse(Console.ReadLine());
 
             //Instanciar o Cliente (ALT + Enter)
-            Cliente cliente = new Cliente();
-            cliente.Nome = nome;
-            cliente.Telefone = tel;
-            cliente.Cpf = cpf;
+            //CTRL + K + C (Comenta as linha selecionadas)
+            //CTRL + K + U (Descomenta as linhas selecionadas)
+            Cliente cliente = new Cliente(nome, tel, cpf);
+            //cliente.Nome = nome;
+            //cliente.Telefone = tel;
+            //cliente.Cpf = cpf;
 
             //Instanciar a conta poupança
-            ContaPoupanca cp = new ContaPoupanca();
-            cp.Numero = numeroPoupanca;
+            ContaPoupanca cp = new ContaPoupanca(numeroPoupanca);
+            //cp.Numero = numeroPoupanca;
 
             //Instanciar a conta corrente
             ContaCorrente cc = new ContaCorrente();

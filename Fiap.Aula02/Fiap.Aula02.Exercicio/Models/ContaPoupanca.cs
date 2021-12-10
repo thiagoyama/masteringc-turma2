@@ -14,6 +14,12 @@ namespace Fiap.Aula02.Exercicio.Models
         public double Numero { get; set; }
         public decimal Rendimentos { get; set; }
 
+        //Construtor
+        public ContaPoupanca(double numero)
+        {
+            Numero = numero;
+        }
+
         //Métodos
         public bool Depositar(decimal valor)
         {
