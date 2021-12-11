@@ -16,8 +16,13 @@ namespace Fiap.Aula02.Exercicio.Models
         //Construtor
         public ContaCorrente(double numero, bool especial, decimal limite,
                         Cliente cliente, ContaPoupanca poupanca, double juros)
-        {
-
+        {            
+            Numero = numero;
+            Especial = especial;
+            Limite = limite;
+            Cliente = cliente;
+            ContaPoupanca = poupanca;
+            Juros = juros;
         }
 
         //Métodos

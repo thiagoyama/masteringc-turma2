@@ -50,16 +50,21 @@ namespace Fiap.Aula02.Exercicio
 
             //Instanciar a conta poupança
             ContaPoupanca cp = new ContaPoupanca(numeroPoupanca);
+       
             //cp.Numero = numeroPoupanca;
 
-            //Instanciar a conta corrente
-            ContaCorrente cc = new ContaCorrente();
-            cc.Numero = numeroCc;
-            cc.Juros = juros;
-            cc.Limite = limite;
-            cc.Especial = especial;
-            cc.ContaPoupanca = cp;
-            cc.Cliente = cliente;
+            //Instanciar a conta corrente (passando o nome do parâmetro e o valor)
+            ContaCorrente cc = new ContaCorrente(numero: numeroCc, cliente: cliente,
+                juros: juros, especial: especial, limite: limite, poupanca: cp);
+
+            //Passando os parâmetros na ordem dos parâmetros do construtor
+            //ContaCorrente cc = new ContaCorrente(numeroCc, especial, limite, cliente, cp, juros);
+            //cc.Numero = numeroCc;
+            //cc.Juros = juros;
+            //cc.Limite = limite;
+            //cc.Especial = especial;
+            //cc.ContaPoupanca = cp;
+            //cc.Cliente = cliente;
 
             int opcao;
             do
