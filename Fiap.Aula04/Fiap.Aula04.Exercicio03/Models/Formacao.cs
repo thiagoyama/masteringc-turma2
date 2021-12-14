@@ -6,33 +6,48 @@ using System.Threading.Tasks;
 
 namespace Fiap.Aula04.Exercicio03.Models
 {
-    class Formacao
+    //Classe abstrata -> não pode ser instanciada e pode conter métodos abstratos (sem implementação)
+    abstract class Formacao
     {
         public string Nome { get; set; }
-        public int Duracao { get; set; }
-        public decimal Mensalidade { get; set; }
+        public int Duracao { get; protected set; }
+        public decimal Mensalidade { get; protected set; }
         public Instituicao Instituicao { get; set; }
 
         public Formacao(string nome)
         {
             Nome = nome;
+            DefinirDuracao();
         }
 
-        public void DefinirDuracao() { }
+        public abstract void DefinirDuracao();
 
         public float CalcularMedia(float nota1, float nota2)
         {
-            return 0;
+            return (nota1 + nota2) / 2;
         }
 
         public float CalcularMedia(float nota1, float nota2, float nota3)
         {
-            return 0;
+            if (nota1 < nota2 && nota1 < nota3)
+            {
+                return CalcularMedia(nota2, nota3);
+            }
+            else if (nota2 < nota1 && nota2 < nota3)
+            {
+                return CalcularMedia(nota1, nota3);
+            }
+            return CalcularMedia(nota1, nota2);
         }
 
         public virtual decimal CalcularMensalidade()
         {
-            return 0;
+            return Mensalidade = Duracao * 400;
+        }
+
+        public override string ToString()
+        {
+            return $"Nome: {Nome}, Duração: {Duracao}, Mensalidade: {Mensalidade}, {Instituicao}";
         }
     }
 }

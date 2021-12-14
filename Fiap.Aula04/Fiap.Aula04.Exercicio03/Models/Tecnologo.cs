@@ -14,7 +14,17 @@ namespace Fiap.Aula04.Exercicio03.Models
 
         public override decimal CalcularMensalidade()
         {
-            return 0;
+            return Mensalidade = Duracao * 500;
+        }
+
+        public override void DefinirDuracao()
+        {
+            Duracao = 24;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" Plano estendido: {PlanoEstendido}";
         }
     }
 }

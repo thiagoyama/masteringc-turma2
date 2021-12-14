@@ -14,5 +14,10 @@ namespace Fiap.Aula04.Exercicio03.Models
         {
             Nome = nome;
         }
+
+        public override string ToString()
+        {
+            return $"Instituição: {Nome}";
+        }
     }
 }

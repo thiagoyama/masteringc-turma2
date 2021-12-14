@@ -18,12 +18,32 @@ namespace Fiap.Aula04.Exercicio03.Models
 
         public override decimal CalcularMensalidade()
         {
-            return 0;
+            return Mensalidade = Duracao * 600 + CargaHorariaEstagio * 12;
         }
 
+        //Valor absoluto do desconto (Ex. 10%)
         public decimal CalcularMensalidade(decimal desconto)
         {
-            return 0;
+            return Mensalidade = CalcularMensalidade() - CalcularMensalidade()*desconto/100;
+        }
+
+        public override void DefinirDuracao()
+        {
+            //Contains() -> Método para verificar se possui a palavra pesquisada
+            //ToLower() -> Método que transforma os caracteres para minusculas
+            if (Nome.ToLower().Contains("engenharia")) 
+            {
+                Duracao = 60;
+            }
+            else
+            {
+                Duracao = 48;
+            }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $" Projeto: {ProjetoConclusao}, Carga horária estágio: {CargaHorariaEstagio}";
         }
 
     }
