@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fiap.Aula02.Exercicio.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Fiap.Aula02.Exercicio.Models
 {
-    class ContaPoupanca
+    class ContaPoupanca : Conta, IContaInvestimento
     {
         //Propriedades
         //private set;  -> somente a classe ContaPoupanca pode modificar o Saldo diretamente
-        public decimal Saldo { get; private set; }
-        public double Numero { get; set; }
         public decimal Rendimentos { get; set; }
 
         //Construtor
@@ -21,24 +20,18 @@ namespace Fiap.Aula02.Exercicio.Models
         }
 
         //Métodos
-        public bool Depositar(decimal valor)
+        public void Retirar(decimal valor)
         {
-            if (valor > 0) //valida se o valor de depósito é positivo
+            if (Saldo < valor)  //validar se o saldo é suficiente
             {
-                Saldo += valor; //Saldo = Saldo + valor;
-                return true;
+                throw new SaldoInsuficienteException($"Valor máximo para saque {Saldo}");
             }
-            return false;
+            Saldo -= valor; //Saldo = Saldo - valor;
         }
 
-        public bool Retirar(decimal valor)
+        public decimal CalcularRetornoInvestimento(decimal taxa)
         {
-            if (Saldo >= valor)  //validar se o saldo é suficiente
-            {
-                Saldo -= valor; //Saldo = Saldo - valor;
-                return true;
-            }
-            return false;
+            return Saldo * taxa;
         }
 
     }//class

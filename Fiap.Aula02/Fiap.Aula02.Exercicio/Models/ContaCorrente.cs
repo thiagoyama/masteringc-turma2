@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Fiap.Aula02.Exercicio.Exceptions;
+using System;
 
 namespace Fiap.Aula02.Exercicio.Models
 {
-    class ContaCorrente
+    class ContaCorrente : Conta
     {
         //Propriedades
-        public decimal Saldo { get; private set; }
-        public double Numero { get; set; }
         public bool Especial { get; set; }
         public decimal Limite { get; set; }
         public Cliente Cliente { get; set; }
@@ -26,17 +25,7 @@ namespace Fiap.Aula02.Exercicio.Models
         }
 
         //Métodos
-        public bool Depositar(decimal valor)
-        {
-            if (valor > 0) //valida se o valor do depósito é positivo
-            {
-                Saldo += valor;
-                return true;
-            }
-            return false;
-        }
-
-        public bool Retirar(decimal valor)
+        public void Retirar(decimal valor)
         {   /*
             if (Especial)
             {
@@ -58,12 +47,11 @@ namespace Fiap.Aula02.Exercicio.Models
             }*/
             //Se for especial E o valor for menor ou igual ao saldo + limite
             //OU se o valor for menor ou igual ao saldo
-            if ((Especial && valor <= Saldo + Limite) || (valor <= Saldo))
+            if ( ! ((Especial && valor <= Saldo + Limite) || (valor <= Saldo)) )
             {
-                Saldo -= valor;
-                return true;
+                throw new SaldoInsuficienteException("Saldo insuficiente");
             }
-            return false;
+            Saldo -= valor;
         }
 
         public decimal RetornarSaldoTotal()
@@ -77,14 +65,10 @@ namespace Fiap.Aula02.Exercicio.Models
             //return Especial ? Saldo + Limite : Saldo;
         }
 
-        public bool TransferirParaPoupanca(decimal valor)
+        public void TransferirParaPoupanca(decimal valor)
         {
-            if (Retirar(valor)) //Chama o método da própria classe
-            {
-                ContaPoupanca.Depositar(valor); //Chama o método do Objeto da ContaPoupanca
-                return true;
-            }
-            return false;
+            Retirar(valor); //Chama o método da própria classe
+            ContaPoupanca.Depositar(valor); //Chama o método do Objeto da ContaPoupanca
         }
 
         public decimal CalcularValorTaxaJuros(int dias)

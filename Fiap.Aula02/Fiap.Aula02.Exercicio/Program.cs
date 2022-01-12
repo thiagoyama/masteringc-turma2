@@ -1,4 +1,5 @@
-﻿using Fiap.Aula02.Exercicio.Models;
+﻿using Fiap.Aula02.Exercicio.Exceptions;
+using Fiap.Aula02.Exercicio.Models;
 using System;
 
 namespace Fiap.Aula02.Exercicio
@@ -50,7 +51,7 @@ namespace Fiap.Aula02.Exercicio
 
             //Instanciar a conta poupança
             ContaPoupanca cp = new ContaPoupanca(numeroPoupanca);
-       
+
             //cp.Numero = numeroPoupanca;
 
             //Instanciar a conta corrente (passando o nome do parâmetro e o valor)
@@ -76,22 +77,43 @@ namespace Fiap.Aula02.Exercicio
                 {
                     case 1:
                         Console.WriteLine("Digite o valor para depósito");
-                        var valor = decimal.Parse(Console.ReadLine()); //Ler o valor para depósito
-                        cc.Depositar(valor); //Depositar o valor 
-                        Console.WriteLine($"O Saldo da conta é {cc.Saldo} e o total {cc.RetornarSaldoTotal()}");
+                        try
+                        {
+                            var valor = decimal.Parse(Console.ReadLine()); //Ler o valor para depósito
+                            cc.Depositar(valor); //Depositar o valor 
+                            Console.WriteLine($"O Saldo da conta é {cc.Saldo} e o total {cc.RetornarSaldoTotal()}");
+                        }
+                        catch (ArgumentException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case 2:
                         Console.WriteLine("Digite o valor para retirar");
-                        valor = decimal.Parse(Console.ReadLine());
-                        cc.Retirar(valor);
-                        Console.WriteLine($"O Saldo da conta é {cc.Saldo} e o total {cc.RetornarSaldoTotal()}");
+                        try
+                        {
+                            var valor = decimal.Parse(Console.ReadLine());
+                            cc.Retirar(valor);
+                            Console.WriteLine($"O Saldo da conta é {cc.Saldo} e o total {cc.RetornarSaldoTotal()}");
+                        }
+                        catch (SaldoInsuficienteException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case 3:
                         Console.WriteLine("Digite o valor para transferir");
-                        valor = decimal.Parse(Console.ReadLine());
-                        cc.TransferirParaPoupanca(valor);
-                        Console.WriteLine($"Saldo da conta {cc.Saldo}, total {cc.RetornarSaldoTotal()}");
-                        Console.WriteLine($"Sado na poupança {cc.ContaPoupanca.Saldo}");
+                        try
+                        {
+                            var valor2 = decimal.Parse(Console.ReadLine());
+                            cc.TransferirParaPoupanca(valor2);
+                            Console.WriteLine($"Saldo da conta {cc.Saldo}, total {cc.RetornarSaldoTotal()}");
+                            Console.WriteLine($"Sado na poupança {cc.ContaPoupanca.Saldo}");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     case 4:
                         Console.WriteLine("Digite a quantidade de dias");
@@ -102,7 +124,7 @@ namespace Fiap.Aula02.Exercicio
                     case 0:
                         Console.WriteLine("Finalizando o sistema");
                         break;
-                    default:                        
+                    default:
                         Console.WriteLine("Opção inválida");
                         break;
                 }

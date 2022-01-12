@@ -13,7 +13,7 @@ namespace Fiap.Aula05.Models
         public string Nome { get; set; }
         public string Cnpj { get; set; }
 
-
+        //Construtor
 
         //Métodos
         public abstract decimal CalcularImposto(decimal faturamento); //método abstrato, sem implementação
